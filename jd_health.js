@@ -104,7 +104,7 @@ async function main() {
     await getTaskDetail(-1)
     
     let Hours = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000).getHours();
-    if (Hours > 9 && Hours < 16) {
+    if (Hours < 12) {
       console.log(`\n收豆子)\n`)
       await doLottery(1)
     }
