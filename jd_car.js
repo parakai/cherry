@@ -1,6 +1,6 @@
 /*
 汽车签到
-cron 43 7,21 * * * jd_car.js
+cron 43 6 * * * jd_car.js
 const $ = new Env('汽车签到');
 */
 const name = '汽车签到'
