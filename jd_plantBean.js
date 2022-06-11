@@ -110,19 +110,18 @@ async function jdPlantBean() {
       console.log(`\n活动太火爆了，还是去买买买吧！\n`)
       return
     }
-    for (let i = 0; i < $.plantBeanIndexResult.data.roundList.length; i++) {
-      if ($.plantBeanIndexResult.data.roundList[i].roundState === "2") {
-        num = i
-        break
-      }
-    }
-    // console.log(plantBeanIndexResult.data.taskList);
     if ($.plantBeanIndexResult && $.plantBeanIndexResult.code === '0' && $.plantBeanIndexResult.data) {
+      // console.log(plantBeanIndexResult.data.taskList);
+      for (let i = 0; i < $.plantBeanIndexResult.data.roundList.length; i++) {
+        if ($.plantBeanIndexResult.data.roundList[i].roundState === "2") {
+          num = i
+          break
+        }
+      }
+
       const shareUrl = $.plantBeanIndexResult.data.jwordShareInfo.shareUrl
       $.myPlantUuid = getParam(shareUrl, 'plantUuid')
       console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.myPlantUuid}\n`);
-      jdPlantBeanShareArr.push($.myPlantUuid)
-
       roundList = $.plantBeanIndexResult.data.roundList;
       currentRoundId = roundList[num].roundId;//本期的roundId
       lastRoundId = roundList[num - 1].roundId;//上期的roundId
@@ -132,6 +131,7 @@ async function jdPlantBean() {
       message += `【上期时间】${roundList[num - 1].dateDesc.replace('上期 ', '')}\n`;
       message += `【上期成长值】${roundList[num - 1].growth}\n`;
       await receiveNutrients();//定时领取营养液
+      await doHelp();//助力
       await doTask();//做日常任务
       // await doEgg();
       await stealFriendWater();
@@ -145,7 +145,7 @@ async function jdPlantBean() {
   } catch (e) {
     $.logErr(e);
     const errMsg = `京东账号${$.index} ${$.nickName || $.UserName}\n任务执行异常，请检查执行日志 ‼️‼️`;
-    // if ($.isNode()) await notify.sendNotify(`${$.name}`, errMsg);
+    if ($.isNode()) await notify.sendNotify(`${$.name}`, errMsg);
     $.msg($.name, '', `${errMsg}`)
   }
 }
