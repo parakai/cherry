@@ -57,9 +57,9 @@ function wait(time) {
 }
 
 async function main() {
-    await signBeanIndex()
-    await wait(3000)
+    // await signBeanIndex()
     await cgame()
+    await wait(10000)
 }
 
 async function signBeanIndex() {
@@ -91,11 +91,11 @@ async function cgame() {
             'Connection': 'keep-alive',
             'Accept-Encoding': 'gzip, deflate, br',
             'Content-Type': 'application/json',
-            'Origin': 'https://pro.m.jd.com',
+            'Origin': 'https://prodev.m.jd.com',
             'ActivityId': '7c51826be9f241c1ad9733df34d242c5',
             'Host': 'cgame-stadium.jd.com',
-            'Referer': 'https://pro.m.jd.com/mall/active/dj6us2JJRLMMBb4iDaSK4wxvBMt/index.html',
-            'Accept-Language': 'zh-cn',
+            'Referer': 'https://prodev.m.jd.com/',
+            'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
             'Accept': 'application/json',
             'Cookie': cookie
         }
