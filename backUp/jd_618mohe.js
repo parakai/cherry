@@ -7,12 +7,12 @@
 ============Quantumultx===============
 [task_local]
 #京东超级盲盒
-1 20 7,12,17,18 6 * jd_618mohe.js, tag=京东超级盲盒, img-url=https://raw.githubusercontent.com/tsukasa007/icon/master/jd_joypark_task.png, enabled=true
+5 20 28-30 6 * jd_618mohe.js, tag=京东超级盲盒, img-url=https://raw.githubusercontent.com/tsukasa007/icon/master/jd_joypark_task.png, enabled=true
 */
 
-const $ = new Env('京东618超级盲盒');
-const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
-const notify = $.isNode() ? require('../sendNotify') : '';
+const $ = new Env('618超级盲盒');
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 const linkId = 'Jim-Gu6R_lyd4LT6nz69ow';
 let cookiesArr = [], cookie = '';
