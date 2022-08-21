@@ -1,11 +1,8 @@
 
 /*
 探味奇遇记
-活动入口：美食馆-右侧悬浮
-活动时间：5月17-6月16
-宝箱陆续开放
-来自：6dylan6/jdpro
-31 0,13 26-31,1-16 5,6 * jd_tanwei.js
+活动时间：8月20结束
+35 10,15 * * * https://raw.githubusercontent.com/6dylan6/jdpro/main/jd_tanwei.js
  */
 
 const $ = new Env('探味奇遇记');
@@ -14,7 +11,7 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message = '';
-let encryptProjectId = '3NhNqgKD5WYkmLLsudX1Z2vVS5pP';
+let encryptProjectId = 'YnxEZcUsgLzE5dukqb7vrmjPnaN';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
