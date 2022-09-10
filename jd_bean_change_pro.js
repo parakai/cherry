@@ -368,6 +368,7 @@ if(DisableIndex!=-1){
 			$.YunFeiQuanEndTime2 = "";
 			$.JoyRunningAmount = "";
 			$.ECardinfo = "";
+			$.PlustotalScore=0;
 			TempBaipiao = "";
 			strGuoqi="";
 			console.log(`******开始查询【京东账号${$.index}】${$.nickName || $.UserName}*********`);
@@ -404,7 +405,8 @@ if(DisableIndex!=-1){
 		         GetJxBeaninfo(), //喜豆查询
 		         GetPigPetInfo(), //金融养猪
 				 GetJoyRuninginfo(), //汪汪赛跑 
-				 CheckEcard() //E卡查询
+				 CheckEcard(), //E卡查询
+				 queryScores()
 		     ])
 			
 			await showMsg();
@@ -651,8 +653,11 @@ async function showMsg() {
 			if ($.levelName == "铜牌")
 				$.levelName = `🥉铜牌`;
 
-			if ($.isPlusVip == 1)
+			if ($.isPlusVip == 1){
 				ReturnMessage += `${$.levelName}Plus`;
+				if($.PlustotalScore)
+					ReturnMessage+=`(${$.PlustotalScore}分)`
+			}
 			else
 				ReturnMessage += `${$.levelName}会员`;
 		}
@@ -1646,7 +1651,7 @@ function redPacket() {
 								if (vo['endTime'] === t) {
 									$.jxRedExpire += parseFloat(vo.balance)
 								}
-							} else if (vo.activityName.includes("极速版")) {
+							} else if (vo.activityName.includes("极速版") || vo.activityName.includes("京东特价")) {
 								$.jsRed += parseFloat(vo.balance)
 								if (vo['endTime'] === t) {
 									$.jsRedExpire += parseFloat(vo.balance)
@@ -2594,9 +2599,9 @@ function GetJoyRuninginfo() {
         "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": cookie,
         "Host": "api.m.jd.com",
-        "Origin": "https://joypark.jd.com",
-        "Referer": "https://joypark.jd.com/",
-        "User-Agent": $.UA
+        "Origin": "https://h5platform.jd.com",
+        "Referer": "https://h5platform.jd.com/",
+        "User-Agent": `jdpingou;iPhone;4.13.0;14.4.2;${randomString(40)};network/wifi;model/iPhone10,2;appBuild/100609;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/1;hasOCPay/0;supportBestPay/0;session/${Math.random * 98 + 1};pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`
 		}
 	var DateToday = new Date();
 	const body = {
@@ -2605,15 +2610,15 @@ function GetJoyRuninginfo() {
 		'joyLinkId':'LsQNxL7iWDlXUs6cFl-AAg'
     };
     const options = {
-        url: `https://api.m.jd.com/?functionId=runningPageHome&body=${encodeURIComponent(JSON.stringify(body))}&t=${DateToday.getTime()}&appid=activities_platform&client=ios&clientVersion=3.8.12`,
+        url: `https://api.m.jd.com/?functionId=runningPageHome&body=${encodeURIComponent(JSON.stringify(body))}&t=${DateToday.getTime()}&appid=activities_platform&client=ios&clientVersion=3.9.2`,
         headers,
     }
-    return new Promise(resolve => {
+	return new Promise(resolve => {
         $.get(options, (err, resp, data) => {
             try {
                 if (err) {
                     console.log(`${JSON.stringify(err)}`)
-                    console.log(`${$.name} API请求失败，请检查网路重试`)
+                    console.log(`GetJoyRuninginfo API请求失败，请检查网路重试`)
                 } else {
                     if (data) {
 						//console.log(data);
@@ -2919,6 +2924,32 @@ function GetDateTime(date) {
 		timeString += date.getSeconds();
 
 	return timeString;
+}
+
+async function queryScores() {
+	if ($.isPlusVip != 1)
+		return
+    let res = ''
+    let url = {
+      url: `https://rsp.jd.com/windControl/queryScore/v1?lt=m&an=plus.mobile&stamp=${Date.now()}`,
+      headers: {
+        'Cookie': cookie,
+        'User-Agent': 'Mozilla/5.0 (Linux; Android 10; Redmi Note 8 Pro Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045715 Mobile Safari/537.36',
+        'Referer': 'https://plus.m.jd.com/rights/windControl'
+      }
+    };
+	
+    $.get(url, async (err, resp, data) => {
+      try {
+        const result = JSON.parse(data)
+        if (result.code == 1000) {
+		  $.PlustotalScore=result.rs.userSynthesizeScore.totalScore;
+        } 
+      } catch (e) {
+        $.logErr(e, resp);
+      }
+    })
+  
 }
 
 // prettier-ignore
