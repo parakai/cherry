@@ -1,8 +1,8 @@
 
 /*
 探味奇遇记
-活动时间：8月20结束
-35 10,15 * * * https://raw.githubusercontent.com/6dylan6/jdpro/main/jd_tanwei.js
+活动时间：9月17结束
+35 1,7 * * * https://raw.githubusercontent.com/6dylan6/jdpro/main/jd_tanwei.js
  */
 
 const $ = new Env('探味奇遇记');
@@ -11,7 +11,7 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message = '';
-let encryptProjectId = 'YnxEZcUsgLzE5dukqb7vrmjPnaN';
+let encryptProjectId = 'VJiJnJrbCQpimXqRLhRaZYPRUTy';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])

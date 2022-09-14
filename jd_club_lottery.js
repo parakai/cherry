@@ -2,7 +2,7 @@
 活动入口：京东APP首页-领京豆-摇京豆
 京东APP首页超级摇一摇(不定时有活动)
 超级品牌日做任务及抽奖
-5 0,10 * * * jd_club_lottery.js
+5 5,21 * * * jd_club_lottery.js
 */
 
 const $ = new Env('摇京豆');

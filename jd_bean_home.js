@@ -8,17 +8,17 @@
 ============Quantumultx===============
 [task_local]
 #领京豆额外奖励
-23 1,18 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js, tag=领京豆额外奖励, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
+27 7 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js, tag=领京豆额外奖励, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "23 1,18 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js, tag=领京豆额外奖励
+cron "27 7 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js, tag=领京豆额外奖励
 
 ===============Surge=================
-领京豆额外奖励 = type=cron,cronexp="23 1,18 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js
+领京豆额外奖励 = type=cron,cronexp="27 7 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js
 
 ============小火箭=========
-领京豆额外奖励 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js, cronexpr="23 1,18 * * *", timeout=3600, enable=true
+领京豆额外奖励 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js, cronexpr="27 7 * * *", timeout=3600, enable=true
  */
 const $ = new Env('领京豆额外奖励');
 

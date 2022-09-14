@@ -2,7 +2,7 @@
 店铺签到，各类店铺签到，有新的店铺直接添加token即可
 每日最多签到22家店铺，超出失败
 更新日期:2022-5-11
-cron 3 0,23 * * * jd_dpsign.js, tag=店铺签到
+cron 3 10 * * * jd_dpsign.js, tag=店铺签到
 */
 const $ = new Env('店铺签到');
 

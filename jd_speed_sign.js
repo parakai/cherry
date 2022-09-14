@@ -1,5 +1,5 @@
 /*
-0 7 * * * jd_speed_sign.js
+20 6,15 * * * jd_speed_sign.js
 京东极速版签到+赚现金任务
 每日9毛左右，满3，10，50可兑换无门槛红包
 ⚠️⚠️⚠️一个号需要运行40分钟左右
@@ -11,17 +11,17 @@
 ============Quantumultx===============
 [task_local]
 #京东极速版
-10 5,15 * * * jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+20 6,15 * * * jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 5,15 * * *" script-path=jd_speed_sign.js,tag=京东极速版
+cron "20 6,15 * * *" script-path=jd_speed_sign.js,tag=京东极速版
 
 ===============Surge=================
-京东极速版 = type=cron,cronexp="0 7 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
+京东极速版 = type=cron,cronexp="20 6,15 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
 
 ============小火箭=========
-京东极速版 = type=cron,script-path=jd_speed_sign.js, cronexpr="0 7 * * *", timeout=33600, enable=true
+京东极速版 = type=cron,script-path=jd_speed_sign.js, cronexpr="20 6,15 * * *", timeout=33600, enable=true
 */
 
 const $ = new Env('京东极速版');
