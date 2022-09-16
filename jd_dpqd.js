@@ -1,5 +1,6 @@
 /*
 店铺签到，各类店铺签到，有新的店铺直接添加token即可
+<<<<<<< HEAD:jd_dpqd.js
 ============Quantumultx===============
 [task_local]
 #店铺签到
@@ -11,6 +12,11 @@ cron "15 2,14 * * *" script-path=https://raw.githubusercontent.com/KingRan/KR/ma
 店铺签到 = type=cron,cronexp="15 2,14 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_shop_sign.js
 ===========小火箭========
 店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_shop_sign.jss, cronexpr="15 2,14 * * *", timeout=3600, enable=true
+=======
+每日最多签到22家店铺，超出失败
+更新日期:2022-5-11
+cron 3 0,23 * * * jd_dpsign.js, tag=店铺签到
+>>>>>>> 7f5ea5da9fb951e1e064507a499c3282b550d10f:jd_dpsign.js
 */
 const $ = new Env('店铺签到');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -24,6 +30,7 @@ let activityId=''
 let vender=''
 let num=0
 let shopname=''
+<<<<<<< HEAD:jd_dpqd.js
 const token = [
 "C71B8EE9D6C7F2B0DF3AF65E3829DAA4",
 "CDE42328CFCB396AF93D28520AE10A72",
@@ -45,6 +52,37 @@ const token = [
 "9CB1A4C8A5C3C738318191D36C5F754F",
 "8B4296C509D8FC3BFAA3967B3DF0B3DC",
 "0CE352C49E77D6354F8F12DD5D6745ED"
+=======
+
+const token=[  
+
+  "58ED412304841D5D228BAE4FA1A39E7B",//2
+  "73D0A9A8312078C28A689588130FC3D2",//514
+  "8500B16BACB6E88500C0F24A1106EF26",//15 
+  "A91FA0869F8D6DC14D824F85176BFAC0",//715
+  "A2DF65DFB418AE156438CB28865F3A01",//15
+  "1D911DAB0865E026F3B42C4C3ABA539D",//12345
+  "9CB1A4C8A5C3C738318191D36C5F754F",//3  
+  "8B4296C509D8FC3BFAA3967B3DF0B3DC",//2-10
+  "32B7FEB8D7B721DFEE49AB99C4BB5DE9",//1-7
+  "4B48A44FE2A9F82B00E5F11E2A9CC6F8",//7
+  "3F090626423A9024543BB01BC4A7ECFE",//3  
+  //"7A43D1847847DD1857A2BA1F27FBF638",//5
+  //"36B2476C222357AB2E08B9D7EE2A319A",//5 
+  //"10D78DB822E2A8F13816A601E5729367",//10
+  //"CE2645E1DB3648186A51CE4B9C0A1EF9",//3
+  //"1F34207EEB6D381E88F36F58FA260092",//3
+  //"2559F6F396915BF6466A5E482CBEA81D",//7 
+  //"8066A55555BB082F4F8918D439B432C4",//5
+  //"67D2D5824D043A5C2EA9C53B900B932C",//7
+  //"85EF8617415A55689D7652B494B50571",//7
+  //"ADD0B95CCD75FF794A147F9A178A7CFE",//5
+  //"FB0FC42FDA3CDB9C64A2A9C9AFFFD1BD",//3
+  //"826E626A661D2A4402CD6230C3694DEC",//1
+  //"5C1B6A780727C7C2D177380C2B6E7D0B",//1
+  //"2B1B0C6408AE5F2732888C4F09FC335E",
+
+>>>>>>> 7f5ea5da9fb951e1e064507a499c3282b550d10f:jd_dpsign.js
 ]
 
 if ($.isNode()) {
