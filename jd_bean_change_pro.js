@@ -1,5 +1,5 @@
 /*
-cron "11 21 * * *" jd_bean_change.js, tag:资产变化强化版by-ccwav
+cron "30 21 * * *" jd_bean_change.js, tag:资产变化强化版by-ccwav
  */
 
 //详细说明参考 https://github.com/ccwav/QLScript2
@@ -217,7 +217,7 @@ if(DisableIndex!=-1){
 }
 
 //京喜牧场
-let EnableJxMC=true;
+let EnableJxMC=false;
 DisableIndex= strDisableList.findIndex((item) => item === "京喜牧场");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭京喜牧场查询");
