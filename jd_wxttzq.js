@@ -1,7 +1,7 @@
 /*
 天天来赚钱，入口：小程序-下面分割横幅
 只做任务，无签到，待完善
-updatetime：2022/9/14
+updatetime：2022/9/14-
 author：https://github.com/6dylan6/jdpro
 */
 const $ = new Env("天天来赚钱-加密");
