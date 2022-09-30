@@ -202,7 +202,7 @@ let args_xh = {
         if ($.cookiesArr[i]) {
             $.cookie = $.cookiesArr[i];
             $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
-            $.index = i + 1;
+            $.index = i + 11;
             $.isLogin = true;
             $.nickName = '';
             await totalBean();
