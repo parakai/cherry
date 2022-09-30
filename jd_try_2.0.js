@@ -198,11 +198,22 @@ let args_xh = {
         return
     }
     args_xh.tabId = args_xh.tabId.sort(() => 0.5 - Math.random())
+    current = new Date().getHours();
+    let j;
     for (let i = 0; i < args_xh.try_num; i++) {
         if ($.cookiesArr[i]) {
-            $.cookie = $.cookiesArr[i];
+            if  (current > 14 && current < 19) {
+                j = i + 9;
+                $.cookie = $.cookiesArr[j];
+            } else if (current > 19) {
+                j = i + 17;
+                $.cookie = $.cookiesArr[j];
+            } else {
+                j = i;
+                $.cookie = $.cookiesArr[j];
+            }
             $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
-            $.index = i + 11;
+            $.index = j;
             $.isLogin = true;
             $.nickName = '';
             await totalBean();
