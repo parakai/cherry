@@ -1,7 +1,7 @@
 /*
   入口>京东极速版>首页>签到免单
   京东极速版,先下单,第二天开始签到
-  18 9 * * * jd_speed_signfree.js 签到免单
+  18 8,20 * * * jd_speed_signfree.js 签到免单
 */
 const $ = new Env('京东极速版签到免单');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -96,16 +96,16 @@ function query() {
                     if (data.success == true) {
                         if (!data.data.signFreeOrderInfoList) {
                             console.log("没有需要签到的商品,请到京东极速版[签到免单]购买商品");
-                            msg.push("没有需要签到的商品,请到京东极速版[签到免单]购买商品")
+                            // msg.push("没有需要签到的商品,请到京东极速版[签到免单]购买商品")
                         } else {
                             $.signFreeOrderInfoList = data.data.signFreeOrderInfoList
                             if (first_flag) {
                                 first_flag = false
                                 console.log("脚本也许随时失效,请注意");
-                                msg.push("脚本也许随时失效,请注意")
+                                // msg.push("脚本也许随时失效,请注意")
                                 if (data.data.risk == false) {
                                     console.log("风控用户,可能有异常");
-                                    msg.push("风控用户,可能有异常")
+                                    // msg.push("风控用户,可能有异常")
                                 }
                             }
                         }
