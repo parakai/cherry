@@ -59,6 +59,7 @@ let lnruns = 0;
       $.isLogin = true;
       $.nickName = '';
       $.hotFlag = false; //是否火爆
+			$.UA = require('./USER_AGENTS').UARAM();
       //await TotalBean();
       console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
       if (!$.isLogin) {
@@ -316,7 +317,7 @@ async function plantBeanIndex() {
 }
 function requestGet(function_id, body = {}) {
   if (!body.version) {
-    body["version"] = "9.0.0.1";
+    body["version"] = "9.2.4.2";
   }
   body["monitor_source"] = "plant_app_plant_index";
   body["monitor_refer"] = "";
@@ -329,7 +330,7 @@ function requestGet(function_id, body = {}) {
         'Host': 'api.m.jd.com',
         'Accept': '*/*',
         'Connection': 'keep-alive',
-        'User-Agent': 'JD4iPhone/167283 (iPhone;iOS 13.6.1;Scale/3.00)',
+        'User-Agent': $.UA,
         'Accept-Language': 'zh-Hans-CN;q=1,en-CN;q=0.9',
         'Accept-Encoding': 'gzip, deflate, br',
         'Content-Type': "application/x-www-form-urlencoded"
@@ -453,23 +454,25 @@ function request(function_id, body = {}) {
   })
 }
 function taskUrl(function_id, body) {
-  body["version"] = "9.2.4.0";
+  body["version"] = "9.2.4.2";
   body["monitor_source"] = "plant_app_plant_index";
+  if (!body["monitor_refer"]){
   body["monitor_refer"] = "";
+  }
   return {
     url: JD_API_HOST,
-    body: `functionId=${function_id}&body=${escape(JSON.stringify(body))}&appid=ld&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2`,
+    body: `functionId=${function_id}&body=${encodeURIComponent(JSON.stringify(body))}&appid=ld&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2`,
     headers: {
       "Cookie": cookie,
-      "Host": "api.m.jd.com",
+      //"Host": "api.m.jd.com",
       "Accept": "*/*",
-      "Connection": "keep-alive",
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      //"Connection": "keep-alive",
+      "User-Agent": $.UA,
       "Accept-Language": "zh-Hans-CN;q=1,en-CN;q=0.9",
       "Accept-Encoding": "gzip, deflate, br",
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    timeout: 10000,
+    timeout: 20000,
   }
 }
 function getParam(url, name) {
