@@ -205,7 +205,7 @@ let args_xh = {
             if  (current > 14 && current < 19) {
                 j = i + 9;
                 $.cookie = $.cookiesArr[j];
-            } else if (current > 19) {
+            } else if (current >= 19) {
                 j = i + 17;
                 $.cookie = $.cookiesArr[j];
             } else {
