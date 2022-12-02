@@ -824,7 +824,7 @@ function invite2() {
     'Cookie': cookie
   }
 
-  let dataString = `functionId=TaskInviteService&body={"method":"participateInviteTask","data":{"channel":"1","encryptionInviterPin":"${encodeURIComponent(inviterId)}","type":1}}&appid=market-task-h5&uuid=&_t=${Date.now()}`;
+  let dataString = `functionId=TaskInviteServiceNew&body={"method":"participateInviteTask","data":{"channel":"1","encryptionInviterPin":"${code}","type":1}}&appid=jx_h5&uuid=&_t=${Date.now()}``;
 
   var options = {
     url: 'https://api.m.jd.com/',
