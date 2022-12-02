@@ -41,9 +41,21 @@ const JD_API_HOST = 'https://api.m.jd.com/', actCode = 'visa-card-001';
   }
   const date = new Date()
   $.last_day = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate() == date.getDate()
+  current = new Date().getHours();
+  let j;
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
-      cookie = cookiesArr[i];
+      if  (current > 14 && current < 19) {
+        j = i + 9;
+        cookie = cookiesArr[j];
+    } else if (current >= 19) {
+        j = i + 17;
+        cookie = cookiesArr[j];
+    } else {
+        j = i;
+        cookie = cookiesArr[j];
+    }
+      // cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
