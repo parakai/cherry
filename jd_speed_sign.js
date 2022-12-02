@@ -45,7 +45,7 @@ const JD_API_HOST = 'https://api.m.jd.com/', actCode = 'visa-card-001';
   let j;
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
-      if  (current > 14 && current < 19) {
+      if  (current >= 14 && current < 19) {
         j = i + 9;
         cookie = cookiesArr[j];
     } else if (current >= 19) {
