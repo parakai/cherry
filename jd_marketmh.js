@@ -1,7 +1,7 @@
 /*
 超市盲盒
 入口：京东APP-更多-超市盲盒
-35 10,20 * * *  jd_marketmh.js
+25 10,20 * * *  jd_marketmh.js
 updatetime：2022-12-8
 jdpro
  */
