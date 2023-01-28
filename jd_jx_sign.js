@@ -5,11 +5,11 @@
 ============Quantumultx===============
 [task_local]
 #京东-京喜双签
-23 11,20 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_jx_sign.js, tag=京东-京喜双签, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
+23 8 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_jx_sign.js, tag=京东-京喜双签, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "23 11,20 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_jx_sign.js, tag=京东-京喜双签
+cron "23 8 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_jx_sign.js, tag=京东-京喜双签
 
 ===============Surge=================
 京东-京喜双签 = type=cron,cronexp="23 11,20 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_jx_sign.js
