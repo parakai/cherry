@@ -87,33 +87,32 @@ const JD_API_HOST = 'https://api.m.jd.com/', actCode = 'visa-card-001';
     $.done();
   })
 
-async function jdGlobal() {
-  try {
-    await richManIndex()
-
-    await wheelsHome()
-    await apTaskList()
-    await wheelsHome()
-
-    // await signInit()
-    // await sign()
-    await invite()
-    await invite2()
-    $.score = 0
-    $.total = 0
-    await taskList()
-    await queryJoy()
-    // await signInit()
-    await cash()
-    if ($.last_day) {
-      console.log('月底了,自动领下单红包奖励')
-      await orderReward()
+  async function jdGlobal() {
+    try {
+      //await richManIndex()
+      // await wheelsHome()
+      // await apTaskList()
+      // await wheelsHome()
+      // if ($.canhelp) {
+        // await invite()
+        // await invite2()
+      // }
+      $.score = 0
+      $.total = 0
+      await taskList()
+      await queryJoy()
+      await cash()
+      if ($.last_day) {
+        console.log('月底了,自动领下单红包奖励')
+        await orderReward()
+      }else{
+        console.log('非月底,不自动领下单红包奖励')
+      }
+      // await showMsg()
+    } catch (e) {
+      $.logErr(e)
     }
-    await showMsg()
-  } catch (e) {
-    $.logErr(e)
   }
-}
 
 
 function showMsg() {
