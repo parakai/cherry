@@ -1,7 +1,8 @@
 /*
 APP首页-领京豆
-21 3 * * * jd_signbeanact.js
+11 4 * * * jd_signbeanact.js
 */
+
 
 const $ = new Env('领京豆签到');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -14,9 +15,10 @@ if ($.isNode()) {
 } else {
     cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonformat($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
+const ua = require('./USER_AGENTS');
 const jdVersion = '10.1.2'
 const iphoneVersion = [Math.ceil(Math.random() * 2 + 12), Math.ceil(Math.random() * 4)]
-const UA = `jdapp;iPhone;${jdVersion};${Math.ceil(Math.random() * 2 + 12)}.${Math.ceil(Math.random() * 4)};${randomString(40)};network/wifi;model/iPhone12,1;addressid/0;appBuild/167802;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS ${iphoneVersion[0]}_${iphoneVersion[1]} like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`
+let UA = `jdapp;iPhone;${jdVersion};${Math.ceil(Math.random() * 2 + 12)}.${Math.ceil(Math.random() * 4)};${randomString(40)};network/wifi;model/iPhone12,1;addressid/0;appBuild/167802;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS ${iphoneVersion[0]}_${iphoneVersion[1]} like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`
 const UUID = UA.split(';') && UA.split(';')[4] || ''
 function randomString(e) {
     e = e || 32;
@@ -37,9 +39,10 @@ function randomString(e) {
             $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
             $.index = i + 1;
             $.bean = 0
+            //UA = ua.UARAM ? ua.UARAM() : ua.USER_AGENT;
             console.log(`\n*****开始【京东账号${$.index}】${$.UserName}****\n`);
             await run();
-            await $.wait(2000);
+            await $.wait(3000);
         }
     }
 
@@ -52,10 +55,11 @@ function randomString(e) {
 
 async function run() {
     try {
-        await takePostRequest('beanTaskList')
-        await $.wait(200);
+        //await takePostRequest('beanTaskList')
+        //await $.wait(500);
         await takePostRequest('signBeanAct')
-
+        await $.wait(500);
+        //await getdouble();
     } catch (e) {
         console.log(e);
     }
@@ -146,6 +150,38 @@ async function getGetRequest(type, body) {
         "User-Agent": UA,
     };
     return { url: url, method: method, headers: headers };
+}
+
+async function getdouble() {
+    let opt = {
+        url: "https://nu.jr.jd.com/gw/generic/jrm/h5/m/process",
+        headers: {
+            Cookie: $.cookie,
+        },
+        body: `reqData=${encodeURIComponent('{"actCode":"F68B2C3E71","type":"3","frontParam":{"belong":"jingdou"}}')}`
+    }
+    return new Promise(async (resolve) => {
+        $.post(opt, async (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(` API请求失败，请检查网路重试`)
+                } else {
+                    if (data.match(/"京豆.*"/)) {
+                        const count = data.match(/\"count\":\"?(\d.*?)\"?,/)[1];
+                        console.log(`双签成功：${count}京豆`)
+                    } else {
+                        const msg = data.match(/},\"businessMsg\":\"(\S.*)\",\"c/)[1]
+                        console.log("金融双签:" + msg)
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp)
+            } finally {
+                resolve()
+            }
+        })
+    })
 }
 function jsonformat(str) {
     if (typeof str == "string") {

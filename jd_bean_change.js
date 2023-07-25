@@ -1,10 +1,10 @@
 /*
-cron "30 21 * * *" jd_bean_change.js, tag:资产变化强化版by-ccwav
+cron "28 8,21 * * *" jd_bean_change.js, tag:资产变化强化版by-ccwav
  */
 
-//详细说明参考 https://github.com/ccwav/QLScript2
+//详细说明参考 https://github.com/ccwav/QLScript2.
 
-const $ = new Env('京东资产变动');
+const $ = new Env('京东资产统计');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const JXUserAgent = $.isNode() ? (process.env.JX_USER_AGENT ? process.env.JX_USER_AGENT : ``) : ``;
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -250,7 +250,7 @@ if(DisableIndex!=-1){
 }
 
 //查优惠券
-let EnableChaQuan=true;
+let EnableChaQuan=false;
 DisableIndex=strDisableList.findIndex((item) => item === "查优惠券");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭优惠券查询");
@@ -264,7 +264,7 @@ if(DisableIndex!=-1){
 }
 
 //汪汪赛跑
-let EnableJoyRun=false;
+let EnableJoyRun=true;
 DisableIndex=strDisableList.findIndex((item) => item === "汪汪赛跑");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭汪汪赛跑查询");
@@ -435,10 +435,10 @@ if(DisableIndex!=-1){
 
 						await notify.sendNotify(`${$.name}`, `${allMessage}`, {
 							url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-						}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
+						}, undefined,TempMessage)
 					}
 					if ($.isNode() && allMessageMonth) {
-						await notify.sendNotify(`京东月资产变动`, `${allMessageMonth}`, {
+						await notify.sendNotify(`京东月资产统计`, `${allMessageMonth}`, {
 							url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 						})
 					}
@@ -515,10 +515,10 @@ if(DisableIndex!=-1){
 				
 				await notify.sendNotify(`${$.name}`, `${allMessage}`, {
 					url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-				}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
+				}, undefined,TempMessage)
 			}
 			if ($.isNode() && allMessageMonth) {
-				await notify.sendNotify(`京东月资产变动`, `${allMessageMonth}`, {
+				await notify.sendNotify(`京东月资产统计`, `${allMessageMonth}`, {
 					url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 				})
 			}
@@ -531,7 +531,7 @@ if(DisableIndex!=-1){
 				allMessageGp2=strAllNotify+`\n`+allMessageGp2;
 			await notify.sendNotify(`${$.name}#2`, `${allMessageGp2}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
+			}, undefined,TempMessage)
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessageGp3) {
@@ -540,7 +540,7 @@ if(DisableIndex!=-1){
 				allMessageGp3=strAllNotify+`\n`+allMessageGp3;
 			await notify.sendNotify(`${$.name}#3`, `${allMessageGp3}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
+			}, undefined,TempMessage)
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessageGp4) {
@@ -549,7 +549,7 @@ if(DisableIndex!=-1){
 				allMessageGp4=strAllNotify+`\n`+allMessageGp4;
 			await notify.sendNotify(`${$.name}#4`, `${allMessageGp4}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
+			}, undefined,TempMessage)
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessage) {
@@ -559,30 +559,30 @@ if(DisableIndex!=-1){
 			
 			await notify.sendNotify(`${$.name}`, `${allMessage}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
+			}, undefined,TempMessage)
 			await $.wait(10 * 1000);
 		}
 
 		if ($.isNode() && allMessageMonthGp2) {
-			await notify.sendNotify(`京东月资产变动#2`, `${allMessageMonthGp2}`, {
+			await notify.sendNotify(`京东月资产统计#2`, `${allMessageMonthGp2}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 			})
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessageMonthGp3) {
-			await notify.sendNotify(`京东月资产变动#3`, `${allMessageMonthGp3}`, {
+			await notify.sendNotify(`京东月资产统计#3`, `${allMessageMonthGp3}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 			})
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessageMonthGp4) {
-			await notify.sendNotify(`京东月资产变动#4`, `${allMessageMonthGp4}`, {
+			await notify.sendNotify(`京东月资产统计#4`, `${allMessageMonthGp4}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 			})
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessageMonth) {
-			await notify.sendNotify(`京东月资产变动`, `${allMessageMonth}`, {
+			await notify.sendNotify(`京东月资产统计`, `${allMessageMonth}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 			})
 			await $.wait(10 * 1000);
@@ -591,28 +591,28 @@ if(DisableIndex!=-1){
 
 	if ($.isNode() && allMessage2Gp2) {
 		allMessage2Gp2 += RemainMessage;
-		await notify.sendNotify("京东白嫖榜#2", `${allMessage2Gp2}`, {
+		await notify.sendNotify("京东白嫖提醒#2", `${allMessage2Gp2}`, {
 			url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 		})
 		await $.wait(10 * 1000);
 	}
 	if ($.isNode() && allMessage2Gp3) {
 		allMessage2Gp3 += RemainMessage;
-		await notify.sendNotify("京东白嫖榜#3", `${allMessage2Gp3}`, {
+		await notify.sendNotify("京东白嫖提醒#3", `${allMessage2Gp3}`, {
 			url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 		})
 		await $.wait(10 * 1000);
 	}
 	if ($.isNode() && allMessage2Gp4) {
 		allMessage2Gp4 += RemainMessage;
-		await notify.sendNotify("京东白嫖榜#4", `${allMessage2Gp4}`, {
+		await notify.sendNotify("京东白嫖提醒#4", `${allMessage2Gp4}`, {
 			url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 		})
 		await $.wait(10 * 1000);
 	}
 	if ($.isNode() && allMessage2) {
 		allMessage2 += RemainMessage;
-		await notify.sendNotify("京东白嫖榜", `${allMessage2}`, {
+		await notify.sendNotify("京东白嫖提醒", `${allMessage2}`, {
 			url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
 		})
 		await $.wait(10 * 1000);
@@ -673,14 +673,13 @@ async function showMsg() {
 			
 	    ReturnMessage += `【账号信息】`;
 	    if ($.isPlusVip) {
-	        ReturnMessage += `Plus会员`;
-	        if ($.PlustotalScore)
-	            ReturnMessage += `(${$.PlustotalScore}分)`
+	        ReturnMessage += `Plus会员`;	        
 	    } else {
 	        ReturnMessage += `普通会员`;
-	        if ($.PlustotalScore)
-	            ReturnMessage += `(${$.PlustotalScore}分)`			
-	    }  
+	    } 
+		if ($.PlustotalScore)
+	        ReturnMessage += `(${$.PlustotalScore}分)` 
+			
 	    ReturnMessage += `,京享值${$.JingXiang}\n`;	    
 	}else{
 		ReturnMessageTitle+= `\n`;
@@ -705,7 +704,7 @@ async function showMsg() {
 			allMessageMonth += ReturnMessageMonth + `\n`;
 		}
 		if ($.isNode() && WP_APP_TOKEN_ONE) {
-			await notify.sendNotifybyWxPucher("京东月资产变动", `${ReturnMessageMonth}`, `${$.UserName}`);
+			await notify.sendNotifybyWxPucher("京东月资产统计", `${ReturnMessageMonth}`, `${$.UserName}`);
 		}
 
 	}
@@ -876,7 +875,7 @@ async function showMsg() {
 	console.log(`${ReturnMessageTitle+ReturnMessage}`);
 
 	if ($.isNode() && WP_APP_TOKEN_ONE) {
-		var strTitle="京东资产变动";
+		var strTitle="京东资产统计";
 		if($.JingXiang){
 			if ($.isRealNameAuth)
 				if (cookie.includes("app_open"))
@@ -902,7 +901,7 @@ async function showMsg() {
 		if(strAllNotify)
 			ReturnMessage=strAllNotify+`\n`+ReturnMessage;
 		
-		await notify.sendNotifybyWxPucher(strTitle, `${ReturnMessage}`, `${$.UserName}`,'\n\n本通知 By https://github.com/KingRan/KR',strsummary);
+		await notify.sendNotifybyWxPucher(strTitle, `${ReturnMessage}`, `${$.UserName}`,undefined,strsummary);
 	}
 
 	//$.msg($.name, '', ReturnMessage , {"open-url": "https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean"});
@@ -1321,9 +1320,9 @@ function jingBeanDetail() {
 			})
 		}, 0 * 1000);
 	})
-  } 
+} 
   
-function getepsign(n, o, t = "sign") {
+function getepsign(n, o, t = "sign") {	
   let e = {
     url: epsignurl, 
     form: {
@@ -1687,7 +1686,7 @@ function jdfruitRequest(function_id, body = {}, timeout = 1000) {
 								llgeterror = true;
 							}
 							else
-								$.JDwaterEveryDayT = data?.firstWaterInit?.totalWaterTimes;
+								$.JDwaterEveryDayT = data.firstWaterInit.totalWaterTimes;
 						}
 					}
 				} catch (e) {
