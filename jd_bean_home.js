@@ -1,7 +1,7 @@
 /*
 领京豆额外奖励
 活动入口：京东APP首页-领京豆
-cron "25 2,14 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_bean_home.js, tag=领京豆额外奖励
+cron "45 2,14 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_bean_home.js, tag=领京豆额外奖励
 
  */
 const $ = new Env('领京豆-升级赚豆');
@@ -221,10 +221,10 @@ function beanDoTask(body, taskType) {
                             }
                         }
                         if (body.actionType === 0) {
-                            if (data.code === "0" && data.data.bizCode === "0") {
+                            if (data.code === "0" && data.data?.bizCode === "0") {
                                 console.log(data.data.bizMsg)
                             } else {
-                                console.log(`完成任务失败：${data}`)
+                                console.log(`完成任务失败：${JSON.stringify(data)}`)
                             }
                         }
                     }
