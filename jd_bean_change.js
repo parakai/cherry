@@ -1,5 +1,5 @@
 /*
-cron "28 8,21 * * *" jd_bean_change.js, tag:资产变化强化版by-ccwav
+cron "28 21 * * *" jd_bean_change.js, tag:资产变化强化版by-ccwav
 export BEANCHANGE_PERSENT="10"  分段变量，ck太多一起发通知会失败，可以分10个一发
  */
 

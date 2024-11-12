@@ -1,5 +1,5 @@
 /*
-1 0,18 * * * jd_dailysign.js
+1 13 * * * jd_dailysign.js
 */
 
 const $ = new Env('每日签到得豆');

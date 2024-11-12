@@ -2,7 +2,7 @@
 积分换话费
 入口：首页-生活·缴费-积分换话费 
 update：2024/5/6
-10 1,14 * * * jd_dwapp.js
+10 14 * * * jd_dwapp.js
 */
 
 const $ = new Env('积分换话费');
