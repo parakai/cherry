@@ -1,39 +1,126 @@
-#### 无互助池，无需配置互助码，账号之间内部互助。
 
-### 目前有加密的如下（不放心请禁用）
+## 6dy
 
-1.jd_zdjr.js   （组队瓜分）
+声明: 此库所有内容仅用于个人学习！！！
 
-2.jd_cjzdgf.js （组队瓜分）
-
-3.jd_zjd.js   （赚京豆）
-
-4.jd_fan.js  （粉丝互动）
-
-5.jd_js_sign.js （极速版签到提现）
-
-6.jd_jx_sign.js （京东-京喜双签）
-
-7.jd_computer.js （电脑配件通用任务）
-
-#### 另外涉及开卡均有部分加密。
+### [TG CHANEL](https://t.me/dylan_jdpro)
 
 
-### 拉取(js py ts)青龙 config.sh 文件中修改
+国内机（带代理）：
 
-ql repo命令拉取脚本时需要拉取的文件后缀，直接写文件后缀名即可
+```
+ql repo https://js.okyago.com/https://github.com/6dylan6/jdpro.git "jd_|jx_|jddj_" "backUp" "^jd[^_]|USER|JD|function|sendNotify|utils"
 
-`RepoFileExtensions="js py ts"`
-
-
-### 取关店铺和商品 使用说明（待完善）
-通过设置变量`UN_SUBSCRIBES`来进行`商品一次性取消数量`, `店铺一次性取消数量`, `商品取关忽略列表`, `店铺取关忽略列表`四项内容的自定义设置，以'&'、回车或'\n'隔开。
-
-|      设定项      |   类型   |            说明            | 示例                             |
-| :--------------: | :------: | :------------------------: | -------------------------------- |
-|  商品取消数/次   |   数字   |     默认20，为0不取消      | 20                               |
-|  店铺取消数/次   |   数字   |     默认20，为0不取消      | 19                               |
-| 商品取关忽略列表 | JSON数组 | 按商品详情页的商品编号设置 | ["100016814096", "100009667851"] |
-| 店铺取关忽略列表 | JSON数组 |       按店铺名关键字       | ["华硕", "丽台京东自营旗舰店"]   |
+```
 
 
+国外机：
+
+```
+ql repo https://github.com/6dylan6/jdpro.git "jd_|jx_|jddj_" "backUp" "^jd[^_]|USER|JD|function|sendNotify|utils"
+
+```
+
+
+线报监控类，[入口](https://github.com/6dylan6/jdm.git)
+
+
+
+## 简要流程
+
+1、部署青龙并登陆，版本不用追新，稳定才好，推荐whyour/qinglong:2.17.9镜像部署。
+
+2、到订阅管理创建订阅并运行；正确配置[参考](https://github.com/6dylan6/jdpro/issues/22)
+
+3、订阅执行完，到定时任务搜索依赖安装（jd_indeps.sh)任务执行；
+
+4、到环境变量，创建变量，名称: JD_COOKIE,值：抓的CK（要安全就手抓），多个每行建一个，不要全写在一个；
+
+5、配置通知，通知的key填写到配置管理config.sh文件；
+
+
+<details>
+<summary>笔记</summary>
+<pre><code>
+
+1、任务并发和分组
+
+并发配置方法：
+
+在任务后面加conc JD_COOKIE
+
+如 task XXXXX.js conc JD_COOKIE
+
+任务分组运行方法：
+
+在任务后面加desi JD_COOKIE 需要运行的ck序号
+
+如 task XXXX.js desi JD_COOKIE 1-10  前10个一组运行，2 8 9就是第2/8/9序号的ck执行，以此类推。
+
+2、通知支持一对一推送和显示备注（需用本库sendnotify文件），还有分组通知等用法参考[notify.md](./notify.md)
+
+备注显示变量如下
+
+export NOTIFY_SHOWNAMETYPE="1"    不做任何变动
+
+export NOTIFY_SHOWNAMETYPE="2"    效果是 :  账号名称：别名(备注)	
+
+export NOTIFY_SHOWNAMETYPE="3"    效果是 :  账号名称：pin(备注)
+
+export NOTIFY_SHOWNAMETYPE="4"    效果是 :  账号名称：备注
+
+3、因为青龙有随机延时（可以在配置文件设置为0，默认300秒），所以涉及准点运行的任务，最后加now，如果是desi或conc不用加也会准时跑。
+
+4、青龙系统通知（新增删除任务、登录等通知），需把通知变量写到config.sh文件，在环境变量里只发脚本运行通知哈。
+
+5、建议调整任务运行超时时间，青龙默认1小时有些跑不完就被强制结束，config.sh里配置。CommandTimeoutTime="3h"  即改为3小时，根据自己ck数量调整。
+
+6、如需禁止某些CK参加所有活动或某些活动功能，实现重组CK顺序功能，包括随机、优先、轮换、组队、分段等功能，把[task_before](./docker/task_before.sh)文件内容复制到配置管理task_before.sh保存
+
+常用变量举例：
+
+Recombin_CK_Mode="1"  全部顺序随机
+
+Recombin_CK_Mode="2" Recombin_CK_ARG1="15" 假设有100个CK，前15个CK按正常顺序靠前，其余CK随机乱序
+
+Recombin_CK_Mode="3" Recombin_CK_ARG1="5" Recombin_CK_ARG2="5"  假设有100个CK，希望前5个账号始终保持在前部，剩余95个账号按照轮换模式每天轮换5个
+
+其他用法具体参考[文档](https://docs.qq.com/doc/DTXh6QUVjRXJ1TFdN)
+</code></pre>
+</details>
+
+
+## 通用环境变量（到配置管理-config.sh里添加变量,export xxx='xxx'格式)
+
+AUTOCFG='true' 自动配置sendNotify文件到deps目录 
+
+代理API模式部分支持
+
+DY_PROXY='URL1@URL2' 多个@分割
+
+PERMIT_API='test' 需要走API代理的js关键词，多个&分割，可不设置，支持的js都会走
+
+DY_PROXY_RENUM='5'  获取IP失败重试次数
+
+DY_PROXY_REDELAY='3' 获取失败重试间隔 单位秒
+
+代理池模式支持全部js脚
+
+DP_POOL='http://xxx' 代理池url
+
+PERMIT_JS='farm&plant&opencard' 需要走代理池的js关键词，多个&分割，必须设置
+
+禁止指定的pin执行任务：
+
+多个任务同pin：BANPIN='任务1|任务2@pin1,pin2'
+
+多个任务不同pin：BANPIN='任务1@pin,pin2&任务2@pin2,pin3'
+
+不指定任务只写pin  全部任务都不执行该pin：BANPIN='pin1,pin2'
+
+
+## 支持的通知方式
+
+server酱，go-cqhttp，pushdeer，Bark App，tg bot，钉钉bot，企业微信bot，企业微信应用消息，飞书，iGot，push plus，WxPusher，gotify
+
+请在配置管理config文件里填写对应key
