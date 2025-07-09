@@ -199,7 +199,7 @@ let isLogin = false;
 if (process.env.NOTIFY_SHOWNAMETYPE) {
     ShowRemarkType = process.env.NOTIFY_SHOWNAMETYPE;
 }
-async function sendNotify(text, desp, params = {}, author = "\n================================\n好物推荐：https://u.jd.com/WLEVYTM",strsummary="") {
+async function sendNotify(text, desp, params = {}, author = "",strsummary="") {
     console.log(`开始发送通知...`); 
 	
 	//NOTIFY_FILTERBYFILE代码来自Ca11back.
@@ -429,7 +429,7 @@ async function sendNotify(text, desp, params = {}, author = "\n=================
             }
         }
 
-        if (strtext.indexOf("cookie已失效") != -1 || strdesp.indexOf("重新登录获取") != -1 || strtext == "Ninja 运行通知") {
+        if (strtext.indexOf("已失效") != -1 || strdesp.indexOf("重新") != -1 || strtext == "Ninja 运行通知") {
             if (Notify_NoCKFalse == "true" && text != "Ninja 运行通知") {
                 console.log(`检测到NOTIFY_NOCKFALSE变量为true,不发送ck失效通知...`);
                 return;
@@ -679,15 +679,15 @@ async function sendNotify(text, desp, params = {}, author = "\n=================
 			TG_API_HOST = process.env["TG_API_HOST"];
 		
 		if (process.env["SMTP_NAME"]) 
-			TG_PROXY_AUTH = process.env["SMTP_NAME"];
+			SMTP_NAME = process.env["SMTP_NAME"];
 		if (process.env["SMTP_PASSWORD"]) 
-			TG_PROXY_HOST = process.env["SMTP_PASSWORD"];
+			SMTP_PASSWORD = process.env["SMTP_PASSWORD"];
 		if (process.env["SMTP_TO"]) 
-			TG_PROXY_PORT = process.env["SMTP_TO"];		
+			SMTP_TO = process.env["SMTP_TO"];		
 		if (process.env["SMTP_EMAIL"]) 
-			TG_API_HOST = process.env["SMTP_EMAIL"];
+			SMTP_EMAIL = process.env["SMTP_EMAIL"];
 		if (process.env["SMTP_SERVICE"]) 
-			TG_API_HOST = process.env["SMTP_SERVICE"];		
+			SMTP_SERVICE = process.env["SMTP_SERVICE"];		
 		
         if (process.env["DD_BOT_TOKEN" + UseGroupNotify] && Use_ddBotNotify) {
             DD_BOT_TOKEN = process.env["DD_BOT_TOKEN" + UseGroupNotify];
@@ -1003,7 +1003,7 @@ function getRemark(strRemark) {
     }
 }
 
-async function sendNotifybyWxPucher(text, desp, PtPin, author = '\n================================\n好物推荐：<a href="https://u.jd.com/WLEVYTM">https://u.jd.com/WLEVYTM</a>', strsummary = "") {
+async function sendNotifybyWxPucher(text, desp, PtPin, author = '', strsummary = "") {
 
     try {
         var Uid = "";
